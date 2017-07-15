@@ -11,11 +11,14 @@ import org.yash.messenger.model.Profile;
 public class MessageService {
 	
 	private static Map<Long, Message> messages = DatabaseClass.getMessages();
-	private static Map<Long, Profile> profiles = DatabaseClass.getProfiles();
+	
+	private static long counter = 0;
 	
 	static {
-		messages.put(1L, new Message(1L, "Hello", "yash"));
-		messages.put(2L, new Message(2L, "Yo", "yash"));
+		long id = ++counter;
+		messages.put(id, new Message(id, "Hello", "yash"));
+		id = ++counter;
+		messages.put(id, new Message(id, "Yo", "yash"));
 	}
 	
 	public MessageService(){
@@ -32,7 +35,7 @@ public class MessageService {
 	}
 	
 	public Message addMessage(Message message){
-		message.setId(messages.size() + 1);
+		message.setId(++counter);
 		messages.put(message.getId(), message);
 		return message;
 	}

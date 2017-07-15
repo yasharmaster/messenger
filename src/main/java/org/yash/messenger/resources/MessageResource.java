@@ -16,27 +16,24 @@ import org.yash.messenger.model.Message;
 import org.yash.messenger.service.MessageService;
 
 @Path("messages")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON) 
 public class MessageResource {
 
 	MessageService messageService = new MessageService();
 	
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
 	public List<Message> getMessages() {
 		return messageService.getAllMessages();
 	}
    
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON) 
     public Message addMessage(Message message) {
     	return messageService.addMessage(message);
     }
     
     @PUT
     @Path("/{messageId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON) 
     public Message updateMessage(@PathParam("messageId") long messageId, Message message) {
     	message.setId(messageId);
     	return messageService.updateMessage(message);
@@ -44,14 +41,12 @@ public class MessageResource {
     
     @DELETE
     @Path("/{messageId}")
-    @Produces(MediaType.APPLICATION_JSON)
     public void deleteMessage(@PathParam("messageId") long messageId) {
     	messageService.removeMessage(messageId);
     }
     
     @GET
     @Path("/{messageId}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Message getMessage(@PathParam("messageId") long messageId) {
     	return messageService.getMessage(messageId);
     }

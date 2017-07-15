@@ -6,24 +6,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Profile {
+	
 	private long id;
-	private String firstName;
-	private String lastName;
+	private String name;
 	private Date created;
 	
 	public Profile(){
 		
 	}
 	
-
-	public Profile(long id, String firstName, String lastName) {
+	public Profile(long id, String name) {
 		super();
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
 		this.created = new Date();
 	}
-
 
 	public long getId() {
 		return id;
@@ -33,20 +30,12 @@ public class Profile {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Date getCreated() {
@@ -56,6 +45,7 @@ public class Profile {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+	
 	
 
 }
