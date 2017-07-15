@@ -1,4 +1,4 @@
-package api;
+package org.yash.messenger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
