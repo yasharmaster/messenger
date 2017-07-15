@@ -2,19 +2,47 @@ package org.yash.messenger.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.yash.messenger.database.DatabaseClass;
 import org.yash.messenger.model.Message;
+import org.yash.messenger.model.Profile;
 
 public class MessageService {
 	
+	private Map<Long, Message> messages = DatabaseClass.getMessages();
+	private Map<Long, Profile> profiles = DatabaseClass.getProfiles();
+	
+	public MessageService(){
+		messages.put(1L, new Message(1L, "Hello", "yash"));
+		messages.put(2L, new Message(2L, "Yo", "yash"));
+	}
 	
 	public List<Message> getAllMessages(){
-		Message m1 = new Message(1L, "Hello", "yash");
-		Message m2 = new Message(2L, "Yo", "yash");
-		List<Message> messageList = new ArrayList<>();
-		messageList.add(m1);
-		messageList.add(m2);
-		return messageList;
+
+		return new ArrayList<>(messages.values());
+	}
+	
+	public Message getMessage(long id){
+		return messages.get(id);
+	}
+	
+	public Message addMessage(Message message){
+		message.setId(messages.size() + 1);
+		messages.put(message.getId(), message);
+		return message;
+	}
+	
+	public Message updateMessage(Message message){
+		if (message.getId() <= 0) {
+			return null;
+		}
+		messages.put(message.getId(), message);
+		return message;
+	}
+	
+	public Message removeMessage(Long id) {
+		return messages.remove(id);
 	}
 	
 	
