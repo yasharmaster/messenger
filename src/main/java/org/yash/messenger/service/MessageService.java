@@ -10,12 +10,16 @@ import org.yash.messenger.model.Profile;
 
 public class MessageService {
 	
-	private Map<Long, Message> messages = DatabaseClass.getMessages();
-	private Map<Long, Profile> profiles = DatabaseClass.getProfiles();
+	private static Map<Long, Message> messages = DatabaseClass.getMessages();
+	private static Map<Long, Profile> profiles = DatabaseClass.getProfiles();
 	
-	public MessageService(){
+	static {
 		messages.put(1L, new Message(1L, "Hello", "yash"));
 		messages.put(2L, new Message(2L, "Yo", "yash"));
+	}
+	
+	public MessageService(){
+
 	}
 	
 	public List<Message> getAllMessages(){
