@@ -1,12 +1,12 @@
 package org.yash.messenger.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 import org.yash.messenger.database.DatabaseClass;
 import org.yash.messenger.model.Message;
-import org.yash.messenger.model.Profile;
 
 public class MessageService {
 	
@@ -26,8 +26,25 @@ public class MessageService {
 	}
 	
 	public List<Message> getAllMessages(){
-
 		return new ArrayList<>(messages.values());
+	}
+	
+	public List<Message> getAllMessagesForYear(int year){
+		List<Message> messageList = new ArrayList<>();
+		Calendar cal = Calendar.getInstance();
+		for (Message msg : messages.values()) {
+			cal.setTime(msg.getCreated());
+			if (cal.get(Calendar.YEAR) == year) {
+				messageList.add(msg);
+			}
+		}
+		return messageList;
+	}
+	
+	public List<Message> getAllMessagesPaginated(int start, int size) {
+			ArrayList<Message> list = new ArrayList<>(messages.values());
+			if (start + size > list.size()) return new ArrayList<Message>();
+			return list.subList(start, start+size);
 	}
 	
 	public Message getMessage(long id){
@@ -36,8 +53,8 @@ public class MessageService {
 	
 	public Message addMessage(Message message){
 		message.setId(++counter);
-		messages.put(message.getId(), message);
-		return message;
+		messages.put(message.getId(), new Message(message.getId(), message.getMessage(), message.getAuthor()));
+		return messages.get(message.getId());
 	}
 	
 	public Message updateMessage(Message message){

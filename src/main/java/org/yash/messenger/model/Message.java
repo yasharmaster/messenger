@@ -15,14 +15,13 @@ public class Message {
 	public Message(){
 		
 	}
-	
-	public Message(long id, String message, String author) {
-		super();
-		this.id = id;
-		this.message = message;
-		this.author = author;
-		this.created = new Date();
-	}
+
+    public Message(long id, String message, String author) {
+    	this.id = id;
+    	this.message = message;
+    	this.author = author;
+    	this.created = new Date();
+    }
 
 	public long getId() {
 		return id;

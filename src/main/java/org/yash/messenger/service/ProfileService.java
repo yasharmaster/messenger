@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.yash.messenger.database.DatabaseClass;
+import org.yash.messenger.model.Message;
 import org.yash.messenger.model.Profile;
 
 public class ProfileService {
@@ -32,8 +33,8 @@ public class ProfileService {
 	
 	public Profile addProfile(Profile profile){
 		profile.setId(++counter);
-		profiles.put(profile.getName(), profile);
-		return profile;
+		profiles.put(profile.getName(), new Profile(profile.getId(), profile.getName()));
+		return profiles.get(profile.getName());
 	}
 	
 	public Profile updateProfile(Profile profile){
