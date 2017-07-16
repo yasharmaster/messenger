@@ -2,6 +2,7 @@ package org.yash.messenger.resources;
 
 import java.util.List;
 
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.yash.messenger.model.Message;
+import org.yash.messenger.resources.beans.MessageFilterBean;
 import org.yash.messenger.service.MessageService;
 
 @Path("messages")
@@ -24,14 +26,12 @@ public class MessageResource {
 	MessageService messageService = new MessageService();
 	
     @GET
-	public List<Message> getMessages(@QueryParam("year") int year,
-			@QueryParam("start") int start,
-			@QueryParam("size") int size) {
-    	if (year > 0) {
-    		return messageService.getAllMessagesForYear(year);
+	public List<Message> getMessages(@BeanParam MessageFilterBean bean) {
+    	if (bean.getYear() > 0) {
+    		return messageService.getAllMessagesForYear(bean.getYear());
     	}
-    	if (start >= 0 && size >= 0) {
-    		return messageService.getAllMessagesPaginated(start, size);
+    	if (bean.getStart() >= 0 && bean.getSize() >= 0) {
+    		return messageService.getAllMessagesPaginated(bean.getStart(), bean.getSize());
     	}
 		return messageService.getAllMessages();
 	}
