@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.yash.messenger.database.DatabaseClass;
-import org.yash.messenger.model.Message;
 import org.yash.messenger.model.Profile;
 
 public class ProfileService {

@@ -11,7 +11,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.yash.messenger.model.Message;
@@ -30,7 +29,7 @@ public class MessageResource {
     	if (bean.getYear() > 0) {
     		return messageService.getAllMessagesForYear(bean.getYear());
     	}
-    	if (bean.getStart() >= 0 && bean.getSize() >= 0) {
+    	if (bean.getStart() >= 0 && bean.getSize() > 0) {
     		return messageService.getAllMessagesPaginated(bean.getStart(), bean.getSize());
     	}
 		return messageService.getAllMessages();
@@ -58,5 +57,10 @@ public class MessageResource {
     @Path("/{messageId}")
     public Message getMessage(@PathParam("messageId") long messageId) {
     	return messageService.getMessage(messageId);
+    }
+    
+    @Path("/{messageId}/comments")
+    public CommentResource getCommentResource(){
+    	return new CommentResource();
     }
 }
