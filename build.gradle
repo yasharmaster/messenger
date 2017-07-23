@@ -13,8 +13,6 @@ tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
 
-
-
 repositories {
         
      maven { url "http://repo.maven.apache.org/maven2" }
@@ -22,4 +20,8 @@ repositories {
 dependencies {
     compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet-core', version:'2.25.1'
     compile group: 'org.glassfish.jersey.media', name: 'jersey-media-moxy', version:'2.25.1'
+    
+    // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api
+	compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
+
 }
