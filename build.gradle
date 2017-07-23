@@ -1,6 +1,9 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+}
+
 apply plugin: 'java'
 apply plugin: 'jetty'
-apply plugin: 'maven'
 
 group = 'org.yash.java'
 version = '1.0-SNAPSHOT'
