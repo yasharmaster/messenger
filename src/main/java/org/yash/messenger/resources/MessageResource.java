@@ -1,5 +1,6 @@
 package org.yash.messenger.resources;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.BeanParam;
@@ -11,7 +12,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.yash.messenger.model.Message;
 import org.yash.messenger.resources.beans.MessageFilterBean;
@@ -36,8 +40,15 @@ public class MessageResource {
 	}
    
     @POST
-    public Message addMessage(Message message) {
-    	return messageService.addMessage(message);
+    public Response addMessage(Message message, @Context UriInfo uriInfo) {
+        Message newMessage = messageService.addMessage(message);
+        String newMessageId = String.valueOf(newMessage.getId());
+        URI uri = uriInfo.getAbsolutePathBuilder()
+                        .path(newMessageId)
+                        .build();
+        return Response.created(uri)
+                        .entity(newMessage)
+                        .build();
     }
     
     @PUT
